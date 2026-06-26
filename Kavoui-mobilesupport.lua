@@ -161,105 +161,6 @@ function Kavo:GetName()
     return LibName
 end
 
-function Kavo:Notify(title, text, duration)
-    title = title or "Notification"
-    text = text or ""
-    duration = duration or 3
-
-    local notifGui = Instance.new("ScreenGui")
-    local notifFrame = Instance.new("Frame")
-    local UICorner = Instance.new("UICorner")
-    local notifTitle = Instance.new("TextLabel")
-    local notifText = Instance.new("TextLabel")
-    local notifBar = Instance.new("Frame")
-    local barCorner = Instance.new("UICorner")
-    local accent = Instance.new("Frame")
-    local accentCorner = Instance.new("UICorner")
-
-    notifGui.Name = randomshit().."N"
-    notifGui.Parent = game.CoreGui
-    notifGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-    notifGui.ResetOnSpawn = false
-
-    notifFrame.Name = randomshit()
-    notifFrame.Parent = notifGui
-    notifFrame.BackgroundColor3 = themeList.Background
-    notifFrame.BorderSizePixel = 0
-    notifFrame.AnchorPoint = Vector2.new(1, 1)
-    notifFrame.Position = UDim2.new(1, -16, 1.2, 0)
-    notifFrame.Size = UDim2.new(0, 260, 0, 70)
-    notifFrame.ClipsDescendants = true
-
-    UICorner.CornerRadius = UDim.new(0, 6)
-    UICorner.Parent = notifFrame
-
-    accent.Name = randomshit()
-    accent.Parent = notifFrame
-    accent.BackgroundColor3 = themeList.SchemeColor
-    accent.BorderSizePixel = 0
-    accent.Size = UDim2.new(0, 4, 1, 0)
-
-    accentCorner.CornerRadius = UDim.new(0, 4)
-    accentCorner.Parent = accent
-
-    notifTitle.Name = randomshit()
-    notifTitle.Parent = notifFrame
-    notifTitle.BackgroundTransparency = 1
-    notifTitle.Position = UDim2.new(0, 14, 0, 8)
-    notifTitle.Size = UDim2.new(1, -18, 0, 18)
-    notifTitle.Font = Enum.Font.GothamSemibold
-    notifTitle.Text = title
-    notifTitle.TextColor3 = themeList.TextColor
-    notifTitle.TextSize = 14
-    notifTitle.TextXAlignment = Enum.TextXAlignment.Left
-    notifTitle.TextTruncate = Enum.TextTruncate.AtEnd
-
-    notifText.Name = randomshit()
-    notifText.Parent = notifFrame
-    notifText.BackgroundTransparency = 1
-    notifText.Position = UDim2.new(0, 14, 0, 30)
-    notifText.Size = UDim2.new(1, -18, 0, 28)
-    notifText.Font = Enum.Font.Gotham
-    notifText.Text = text
-    notifText.TextColor3 = Color3.fromRGB(
-        themeList.TextColor.R * 255 - 40,
-        themeList.TextColor.G * 255 - 40,
-        themeList.TextColor.B * 255 - 40
-    )
-    notifText.TextSize = 12
-    notifText.TextXAlignment = Enum.TextXAlignment.Left
-    notifText.TextYAlignment = Enum.TextYAlignment.Top
-    notifText.TextWrapped = true
-
-    notifBar.Name = randomshit()
-    notifBar.Parent = notifFrame
-    notifBar.BackgroundColor3 = themeList.SchemeColor
-    notifBar.BorderSizePixel = 0
-    notifBar.AnchorPoint = Vector2.new(0, 1)
-    notifBar.Position = UDim2.new(0, 0, 1, 0)
-    notifBar.Size = UDim2.new(1, 0, 0, 3)
-
-    barCorner.CornerRadius = UDim.new(0, 4)
-    barCorner.Parent = notifBar
-
-    tween:Create(notifFrame, tweeninfo(0.4, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {
-        Position = UDim2.new(1, -16, 1, -16)
-    }):Play()
-
-    tween:Create(notifBar, tweeninfo(duration, Enum.EasingStyle.Linear), {
-        Size = UDim2.new(0, 0, 0, 3)
-    }):Play()
-
-    task.delay(duration, function()
-        local out = tween:Create(notifFrame, tweeninfo(0.35, Enum.EasingStyle.Quint, Enum.EasingDirection.In), {
-            Position = UDim2.new(1.2, 0, 1, -16)
-        })
-        out:Play()
-        out.Completed:Wait()
-        notifGui:Destroy()
-    end)
-end
-
 function Kavo.CreateLib(kavName, themeList)
     if not themeList then
         themeList = themes
@@ -478,6 +379,106 @@ function Kavo.CreateLib(kavName, themeList)
             themeList.ElementColor = color
         end
     end
+
+    function Kavo:Notify(title, text, duration)
+        title = title or "Notification"
+        text = text or ""
+        duration = duration or 3
+
+        local notifGui = Instance.new("ScreenGui")
+        local notifFrame = Instance.new("Frame")
+        local UICorner = Instance.new("UICorner")
+        local notifTitle = Instance.new("TextLabel")
+        local notifText = Instance.new("TextLabel")
+        local notifBar = Instance.new("Frame")
+        local barCorner = Instance.new("UICorner")
+        local accent = Instance.new("Frame")
+        local accentCorner = Instance.new("UICorner")
+
+        notifGui.Name = randomshit().."N"
+        notifGui.Parent = game.CoreGui
+        notifGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+        notifGui.ResetOnSpawn = false
+
+        notifFrame.Name = randomshit()
+        notifFrame.Parent = notifGui
+        notifFrame.BackgroundColor3 = themeList.Background
+        notifFrame.BorderSizePixel = 0
+        notifFrame.AnchorPoint = Vector2.new(1, 1)
+        notifFrame.Position = UDim2.new(1, -16, 1.2, 0)
+        notifFrame.Size = UDim2.new(0, 260, 0, 70)
+        notifFrame.ClipsDescendants = true
+
+        UICorner.CornerRadius = UDim.new(0, 6)
+        UICorner.Parent = notifFrame
+
+        accent.Name = randomshit()
+        accent.Parent = notifFrame
+        accent.BackgroundColor3 = themeList.SchemeColor
+        accent.BorderSizePixel = 0
+        accent.Size = UDim2.new(0, 4, 1, 0)
+
+        accentCorner.CornerRadius = UDim.new(0, 4)
+        accentCorner.Parent = accent
+
+        notifTitle.Name = randomshit()
+        notifTitle.Parent = notifFrame
+        notifTitle.BackgroundTransparency = 1
+        notifTitle.Position = UDim2.new(0, 14, 0, 8)
+        notifTitle.Size = UDim2.new(1, -18, 0, 18)
+        notifTitle.Font = Enum.Font.GothamSemibold
+        notifTitle.Text = title
+        notifTitle.TextColor3 = themeList.TextColor
+        notifTitle.TextSize = 14
+        notifTitle.TextXAlignment = Enum.TextXAlignment.Left
+        notifTitle.TextTruncate = Enum.TextTruncate.AtEnd
+
+        notifText.Name = randomshit()
+        notifText.Parent = notifFrame
+        notifText.BackgroundTransparency = 1
+        notifText.Position = UDim2.new(0, 14, 0, 30)
+        notifText.Size = UDim2.new(1, -18, 0, 28)
+        notifText.Font = Enum.Font.Gotham
+        notifText.Text = text
+        notifText.TextColor3 = Color3.fromRGB(
+            themeList.TextColor.R * 255 - 40,
+            themeList.TextColor.G * 255 - 40,
+            themeList.TextColor.B * 255 - 40
+        )
+        notifText.TextSize = 12
+        notifText.TextXAlignment = Enum.TextXAlignment.Left
+        notifText.TextYAlignment = Enum.TextYAlignment.Top
+        notifText.TextWrapped = true
+
+        notifBar.Name = randomshit()
+        notifBar.Parent = notifFrame
+        notifBar.BackgroundColor3 = themeList.SchemeColor
+        notifBar.BorderSizePixel = 0
+        notifBar.AnchorPoint = Vector2.new(0, 1)
+        notifBar.Position = UDim2.new(0, 0, 1, 0)
+        notifBar.Size = UDim2.new(1, 0, 0, 3)
+
+        barCorner.CornerRadius = UDim.new(0, 4)
+        barCorner.Parent = notifBar
+
+        tween:Create(notifFrame, tweeninfo(0.4, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {
+            Position = UDim2.new(1, -16, 1, -16)
+        }):Play()
+
+        tween:Create(notifBar, tweeninfo(duration, Enum.EasingStyle.Linear), {
+            Size = UDim2.new(0, 0, 0, 3)
+        }):Play()
+
+        task.delay(duration, function()
+            local out = tween:Create(notifFrame, tweeninfo(0.35, Enum.EasingStyle.Quint, Enum.EasingDirection.In), {
+                Position = UDim2.new(1.2, 0, 1, -16)
+            })
+            out:Play()
+            out.Completed:Wait()
+            notifGui:Destroy()
+        end)
+    end
+
     local Tabs = {}
 
     local first = true
